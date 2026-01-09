@@ -1,0 +1,34 @@
+# --- Python / uv ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.python-version
+# We keep uv.lock because it's a "lockfile" for reproducibility
+# !uv.lock 
+
+# --- Docker & Databases ---
+# Ignore the actual data files for the local database
+pgdata/
+# Ignore any exported SQL dumps you generate locally
+*.sql
+
+# --- Jupyter Notebooks ---
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# --- Environment & Secrets ---
+.env
+.env.*
+!.env.example
+
+# --- IDEs (VS Code / Codespaces) ---
+.vscode/*
+.history/
+*.code-workspace
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
+
+!.vscode/settings.json

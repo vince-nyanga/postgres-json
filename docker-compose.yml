@@ -1,0 +1,32 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: hones_pg_lab
+    environment:
+      POSTGRES_USER: hones
+      POSTGRES_PASSWORD: secretpassword
+      POSTGRES_DB: marketplace
+    ports:
+      - "9876:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hones -d marketplace"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: hones_pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@hones.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8080:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
